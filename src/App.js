@@ -1,8 +1,9 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AdminLayout from 'layouts/AdminLayout';
 import ClientLayout from 'layouts/ClientLayout';
+import Login from 'pages/shared/Auth/Login';
 import PageNotFound from 'pages/shared/PageNotFound';
-import { adminRoutes, clientRoutes } from './routes';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { adminRoutes, clientRoutes } from 'routes';
 
 function App() {
 	const renderLayout = (routes, Layout) => {
@@ -23,8 +24,8 @@ function App() {
 			<Router>
 				<Switch>
 					{renderLayout(clientRoutes, ClientLayout)}
-					{/* {renderLayout(adminRoutes, AdminLayout)} */}
-					{/* <Route path='/login' componet={Login} /> */}
+					{renderLayout(adminRoutes, AdminLayout)}
+					<Route path='/' componet={Login} />
 					<Route path='*' component={PageNotFound} />
 				</Switch>
 			</Router>

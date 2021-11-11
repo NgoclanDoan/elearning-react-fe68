@@ -1,7 +1,7 @@
 import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from './types';
 
 const initialState = {
-	currentUser: null,
+	currentUser: 'QuanTri',
 	loading: false,
 	error: null,
 };

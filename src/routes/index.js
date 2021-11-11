@@ -15,6 +15,6 @@ export const adminRoutes = [
 		path: '/admin',
 		component: Dashboard,
 		exact: true,
-		isPrivate: true,
+		isPrivate: false,
 	},
 ];

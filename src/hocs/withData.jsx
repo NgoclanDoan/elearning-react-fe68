@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loader from 'components/Loader';
 
 const withData = (WrappedComponent) => {
@@ -14,8 +14,8 @@ const withData = (WrappedComponent) => {
 				.then((response) => {
 					setData(response.data.content.slice(0, 10));
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					console.log(error);
 				});
 		}, []);
 
