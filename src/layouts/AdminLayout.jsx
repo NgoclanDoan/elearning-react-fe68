@@ -1,7 +1,7 @@
 import withLayout from 'hocs/withLayout';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
 	MenuUnfoldOutlined,
@@ -32,13 +32,15 @@ function AdminLayout(props) {
 				<div className='logo' />
 				<Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
 					<Menu.Item key='1' icon={<UserOutlined />}>
-						nav 1
+						<NavLink to='/admin/nguoidung'>
+							Quản lý người dùng
+						</NavLink>
 					</Menu.Item>
 					<Menu.Item key='2' icon={<VideoCameraOutlined />}>
-						nav 2
+						<NavLink to='/admin/khoahoc'>Quản lý khóa học</NavLink>
 					</Menu.Item>
 					<Menu.Item key='3' icon={<UploadOutlined />}>
-						nav 3
+						<NavLink to='/admin/ghidanh'>Ghi danh</NavLink>
 					</Menu.Item>
 				</Menu>
 			</Sider>
@@ -53,7 +55,15 @@ function AdminLayout(props) {
 							onClick: () => toggle(),
 						}
 					)}
-					<div class='w-14 h-14 rounded-full bg-black text-gray-400 flex items-center justify-center mr-5'></div>
+
+					<div className='relative flex-shrink-0 mr-5 cursor-pointer'>
+						<span className='absolute bottom-0 right-0 w-4 h-4 bg-green-600 border rounded-full text-coolGray-800 border-coolGray-50' />
+						<img
+							src='https://source.unsplash.com/50x50/?portrait'
+							alt
+							className='w-12 h-12 border rounded-full bg-coolGray-500 border-coolGray-300'
+						/>
+					</div>
 				</Header>
 				<Content
 					className='site-layout-background'

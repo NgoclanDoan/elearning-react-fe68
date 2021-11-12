@@ -1,5 +1,7 @@
 import Home from 'pages/client/Home';
 import Dashboard from 'pages/admin/Dashboard/Dashboard';
+import QuanLyNguoiDung from '../pages/admin/QuanLyNguoiDung/QuanLyNguoiDung';
+import QuanLyKhoaHoc from '../pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc';
 
 export const clientRoutes = [
 	{
@@ -12,8 +14,14 @@ export const clientRoutes = [
 
 export const adminRoutes = [
 	{
-		path: '/admin',
-		component: Dashboard,
+		path: '/admin/nguoidung',
+		component: QuanLyNguoiDung,
+		exact: true,
+		isPrivate: false,
+	},
+	{
+		path: '/admin/khoahoc',
+		component: QuanLyKhoaHoc,
 		exact: true,
 		isPrivate: false,
 	},
