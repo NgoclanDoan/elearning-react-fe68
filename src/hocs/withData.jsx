@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loader from 'components/Loader';
+import Loader from 'components/Loader/Loader';
 
 const withData = (WrappedComponent) => {
 	return (props) => {

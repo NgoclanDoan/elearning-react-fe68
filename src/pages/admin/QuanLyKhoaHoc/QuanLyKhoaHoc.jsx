@@ -1,12 +1,13 @@
 import React from 'react';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
+import TableKhoaHoc from './TableKhoaHoc/TableKhoaHoc';
 
 function QuanLyKhoaHoc() {
 	return (
 		<div>
 			<Breadcrumb />
 
-			<div className='flex justify-between items-center'>
+			<div className='flex justify-between items-center mb-4'>
 				<h1 className='text-2xl font-bold text-gray-900'>
 					QUẢN LÝ KHÓA HỌC
 				</h1>
@@ -37,6 +38,9 @@ function QuanLyKhoaHoc() {
 					/>
 				</div>
 			</div>
+
+			{/* Table khoa hoc */}
+			<TableKhoaHoc />
 		</div>
 	);
 }

@@ -7,10 +7,11 @@ import { adminRoutes, clientRoutes } from 'routes';
 
 function App() {
 	const renderLayout = (routes, Layout) => {
-		return routes.map((route) => {
+		return routes.map((route, idx) => {
 			const { path, component, exact, isPrivate } = route;
 			return (
 				<Layout
+					key={idx}
 					path={path}
 					component={component}
 					exact={exact}
@@ -25,7 +26,7 @@ function App() {
 				<Switch>
 					{renderLayout(clientRoutes, ClientLayout)}
 					{renderLayout(adminRoutes, AdminLayout)}
-					<Route path='/' componet={Login} />
+					<Route path='/login' component={Login} />
 					<Route path='*' component={PageNotFound} />
 				</Switch>
 			</Router>

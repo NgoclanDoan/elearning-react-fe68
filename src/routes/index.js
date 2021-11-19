@@ -1,7 +1,7 @@
-import Home from 'pages/client/Home';
-import Dashboard from 'pages/admin/Dashboard/Dashboard';
-import QuanLyNguoiDung from '../pages/admin/QuanLyNguoiDung/QuanLyNguoiDung';
-import QuanLyKhoaHoc from '../pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc';
+import Home from 'pages/client/Home/Home';
+
+import QuanLyNguoiDung from 'pages/admin/QuanLyNguoiDung/QuanLyNguoiDung';
+import QuanLyKhoaHoc from 'pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc';
 
 export const clientRoutes = [
 	{

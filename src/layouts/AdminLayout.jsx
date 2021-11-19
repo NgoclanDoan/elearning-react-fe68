@@ -10,7 +10,6 @@ import {
 	VideoCameraOutlined,
 	UploadOutlined,
 } from '@ant-design/icons';
-import 'layouts/AdminLayout.css';
 
 const { Header, Sider, Content } = Layout;
 
