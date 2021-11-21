@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { Formik, Form, ErrorMessage, FastField } from 'formik';
-import * as Yup from 'yup';
 import nguoiDungApi from 'apis/nguoiDungApi';
+import LoaderSubmit from 'components/LoaderSubmit';
+import NotifyError from 'components/NotifyError';
+import { ErrorMessage, FastField, Form, Formik } from 'formik';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from 'components/Loader/Loader';
+import { Redirect, useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 import {
 	actLoginFail,
 	actLoginRequest,
 	actLoginSuccess,
 } from '../module/actions';
-import LoaderSubmit from 'components/LoaderSubmit';
-import NotifyError from 'components/NotifyError';
 
 function Login() {
+	const history = useHistory();
+
 	const [showpass, setShowPass] = useState(false);
-	const [userInfo, setUserInfo] = useState({});
 
 	const dispatch = useDispatch();
-	const { loading, error } = useSelector((state) => state.authReducer);
+	const { loading, error, currentUser } = useSelector(
+		(state) => state.authReducer
+	);
 
 	const initialValues = { taiKhoan: '', matKhau: '' };
 
@@ -29,17 +32,18 @@ function Login() {
 	const handleOnSubmit = (values, { setSubmitting }) => {
 		dispatch(actLoginRequest());
 
-		console.log(values);
-
 		nguoiDungApi
 			.dangNhap(values)
-			.then((res) => dispatch(actLoginSuccess(res.data.content)))
+			.then((res) => {
+				dispatch(actLoginSuccess(res.data));
+				history.push('/');
+			})
 			.catch((err) => dispatch(actLoginFail(err.response.data)));
 
 		setSubmitting(false);
 	};
 
-	return (
+	return !currentUser ? (
 		<>
 			{error && <NotifyError message={error} />}
 			<div className='h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4'>
@@ -294,6 +298,8 @@ function Login() {
 				</Formik>
 			</div>
 		</>
+	) : (
+		<Redirect to='/' />
 	);
 }
 

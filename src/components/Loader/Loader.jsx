@@ -5,10 +5,10 @@ export default class Loader extends Component {
 	render() {
 		return (
 			<div>
-				<div class='loader'>
-					<div class='loader__outer'></div>
-					<div class='loader__middle'></div>
-					<div class='loader__inner'></div>
+				<div className='loader'>
+					<div className='loader__outer' />
+					<div className='loader__middle' />
+					<div className='loader__inner' />
 				</div>
 			</div>
 		);

@@ -4,6 +4,7 @@ import ClientLayout from 'layouts/ClientLayout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { adminRoutes, clientRoutes } from 'routes';
 import Loader from './components/Loader/Loader';
+import AuthRoute from './hocs/AuthRoute';
 
 //Lazy load - Code splitting
 const Login = React.lazy(() => import('pages/shared/Auth/Login'));
@@ -32,7 +33,10 @@ function App() {
 					<Switch>
 						{renderLayout(clientRoutes, ClientLayout)}
 						{renderLayout(adminRoutes, AdminLayout)}
-						<Route path='/login' component={Login} />
+						<AuthRoute path='/login'>
+							<Login />
+						</AuthRoute>
+						{/* <Route path='/login' component={Login} /> */}
 						<Route path='/signup' component={Signup} />
 						<Route path='*' component={PageNotFound} />
 					</Switch>

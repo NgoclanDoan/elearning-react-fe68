@@ -2,6 +2,8 @@ import Home from 'pages/client/Home/Home';
 
 import QuanLyNguoiDung from 'pages/admin/QuanLyNguoiDung/QuanLyNguoiDung';
 import QuanLyKhoaHoc from 'pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc';
+import EditKhoaHoc from '../pages/admin/QuanLyKhoaHoc/Edit';
+import AddKhoaHoc from '../pages/admin/QuanLyKhoaHoc/Add';
 
 export const clientRoutes = [
 	{
@@ -17,12 +19,24 @@ export const adminRoutes = [
 		path: '/admin/nguoidung',
 		component: QuanLyNguoiDung,
 		exact: true,
-		isPrivate: false,
+		isPrivate: true,
 	},
 	{
 		path: '/admin/khoahoc',
 		component: QuanLyKhoaHoc,
 		exact: true,
-		isPrivate: false,
+		isPrivate: true,
+	},
+	{
+		path: '/admin/khoahoc/edit/:id',
+		component: EditKhoaHoc,
+		exact: true,
+		isPrivate: true,
+	},
+	{
+		path: '/admin/khoahoc/add',
+		component: AddKhoaHoc,
+		exact: true,
+		isPrivate: true,
 	},
 ];
