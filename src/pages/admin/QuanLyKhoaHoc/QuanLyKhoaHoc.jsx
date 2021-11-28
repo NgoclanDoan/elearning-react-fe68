@@ -1,46 +1,88 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import khoaHocApi from 'apis/khoaHocApi';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
+import Search from './Search/Search';
 import TableKhoaHoc from './TableKhoaHoc/TableKhoaHoc';
+import { useDispatch } from 'react-redux';
+import {
+	actLayDanhSachKhoaHocRequest,
+	actLayDanhSachKhoaHocSuccess,
+} from './module/action';
+import { NavLink } from 'react-router-dom';
 
-function QuanLyKhoaHoc() {
+function QuanLyKhoaHoc({ history }) {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(actLayDanhSachKhoaHocRequest());
+		khoaHocApi
+			.layDanhSachKhoaHoc()
+			.then((res) => dispatch(actLayDanhSachKhoaHocSuccess(res.data)))
+			.catch((err) => console.log(err));
+	}, []);
+
 	return (
 		<div>
 			<Breadcrumb />
 
 			<div className='flex justify-between items-center mb-4'>
-				<h1 className='text-2xl font-bold text-gray-900'>
-					QUẢN LÝ KHÓA HỌC
-				</h1>
-				{/* Search term */}
-
-				<div className='relative rounded-md shadow-sm'>
-					<div className='absolute inset-y-0 left-0 px-3 flex items-center pointer-events-none'>
-						<span className='text-gray-500 sm:text-sm'>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								class='h-5 w-5'
-								viewBox='0 0 20 20'
-								fill='currentColor'>
+				<NavLink to='/admin/khoahoc/add'>
+					<button className='px-4 bg-green-500 flex justify-between items-center w-44 h-10 hover:bg-green-700'>
+						<svg
+							width='24'
+							height='24'
+							viewBox='0 0 24 24'
+							fill='none'
+							xmlns='http://www.w3.org/2000/svg'>
+							<g opacity='0.8'>
 								<path
-									fill-rule='evenodd'
-									d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'
-									clip-rule='evenodd'
+									d='M9 4H5C4.44772 4 4 4.44772 4 5V9C4 9.55228 4.44772 10 5 10H9C9.55228 10 10 9.55228 10 9V5C10 4.44772 9.55228 4 9 4Z'
+									stroke='#1F2937'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
 								/>
-							</svg>
-						</span>
-					</div>
-					<input
-						type='text'
-						name='price'
-						id='price'
-						className='focus:ring-indigo-500 focus:border-indigo-500 block w-full px-12 sm:text-sm border-gray-300 rounded-md'
-						placeholder={'Search'}
-					/>
+								<path
+									d='M9 14H5C4.44772 14 4 14.4477 4 15V19C4 19.5523 4.44772 20 5 20H9C9.55228 20 10 19.5523 10 19V15C10 14.4477 9.55228 14 9 14Z'
+									stroke='#1F2937'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+								<path
+									d='M19 14H15C14.4477 14 14 14.4477 14 15V19C14 19.5523 14.4477 20 15 20H19C19.5523 20 20 19.5523 20 19V15C20 14.4477 19.5523 14 19 14Z'
+									stroke='#1F2937'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+								<path
+									d='M14 7H20'
+									stroke='#1F2937'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+								<path
+									d='M17 4V10'
+									stroke='#1F2937'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+							</g>
+						</svg>
+						<p className='text-base leading-5  '>Thêm khóa học</p>
+					</button>
+				</NavLink>
+				{/* Search term */}
+				<div className='relative rounded-md shadow-sm'>
+					<Search />
 				</div>
 			</div>
 
 			{/* Table khoa hoc */}
-			<TableKhoaHoc />
+			<TableKhoaHoc history={history} />
 		</div>
 	);
 }

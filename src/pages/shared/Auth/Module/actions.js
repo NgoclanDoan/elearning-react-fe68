@@ -1,22 +1,18 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS } from './types';
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from './types';
 
-const actLoginRequest = () => ({
+export const actLoginRequest = () => ({
 	type: LOGIN_REQUEST,
 });
 
-const actLoginSuccess = (currentUser) => ({
+export const actLoginSuccess = (currentUser) => ({
 	type: LOGIN_SUCCESS,
 	payload: currentUser,
 });
 
-const actLoginFail = (error) => ({
+export const actLoginFail = (error) => ({
 	type: LOGIN_FAIL,
 	payload: error,
 });
-
-export const actLogin = (user, history) => {
-	return (dispatch) => {};
-};
 
 export const actLogout = () => ({
 	type: LOGOUT,
