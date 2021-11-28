@@ -18,6 +18,14 @@ const nguoiDungApi = {
 			accessToken
 		);
 	},
+	themNguoiDung(values, accessToken) {
+		return callApi(
+			'QuanLyNguoiDung/ThemNguoiDung',
+			'POST',
+			values,
+			accessToken
+		);
+	},
 	layDanhSachNguoiDung() {
 		return callApi('QuanLyNguoiDung/LayDanhSachNguoiDung');
 	},
@@ -31,10 +39,10 @@ const nguoiDungApi = {
 			`QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUP_ID}&tuKhoa=${searchTerm}`
 		);
 	},
-	timKiemNguoiDung(user) {
+	thongTinNguoiDung(user) {
 		return callApi('QuanLyNguoiDung/ThongTinTaiKhoan', 'POST', user);
 	},
-	timKiemNguoiDung(userInfo) {
+	themNguoiDung(userInfo) {
 		return callApi('QuanLyNguoiDung/ThemNguoiDung', 'POST', userInfo);
 	},
 	capNhatThongTinNguoiDung(userInfo, accessToken) {
@@ -45,11 +53,11 @@ const nguoiDungApi = {
 			accessToken
 		);
 	},
-	xoaNguoiDung(userName, accessToken) {
+	xoaNguoiDung(idUser, accessToken) {
 		return callApi(
-			'QuanLyNguoiDung/XoaNguoiDung',
+			`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${idUser}`,
 			'DELETE',
-			userName,
+			idUser,
 			accessToken
 		);
 	},

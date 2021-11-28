@@ -7,9 +7,9 @@ import Loader from './components/Loader/Loader';
 import AuthRoute from './hocs/AuthRoute';
 
 //Lazy load - Code splitting
-const Login = React.lazy(() => import('pages/shared/Auth/Login'));
-const Signup = React.lazy(() => import('pages/shared/Auth/Signup'));
-const PageNotFound = React.lazy(() => import('pages/shared/PageNotFound'));
+const LazyLogin = React.lazy(() => import('pages/shared/Auth/Login'));
+const LazySignup = React.lazy(() => import('pages/shared/Auth/Signup'));
+const LazyPageNotFound = React.lazy(() => import('pages/shared/PageNotFound'));
 
 function App() {
 	const renderLayout = (routes, Layout) => {
@@ -33,12 +33,12 @@ function App() {
 					<Switch>
 						{renderLayout(clientRoutes, ClientLayout)}
 						{renderLayout(adminRoutes, AdminLayout)}
-						<AuthRoute path='/login'>
-							<Login />
-						</AuthRoute>
+						<Route path='/login'>
+							<LazyLogin />
+						</Route>
 						{/* <Route path='/login' component={Login} /> */}
-						<Route path='/signup' component={Signup} />
-						<Route path='*' component={PageNotFound} />
+						<Route path='/signup' component={LazySignup} />
+						<Route path='*' component={LazyPageNotFound} />
 					</Switch>
 				</Router>
 			</Suspense>
