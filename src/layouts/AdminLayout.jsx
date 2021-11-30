@@ -38,6 +38,7 @@ function AdminLayout(props) {
 					height: '100vh',
 					position: 'fixed',
 					left: 0,
+					zIndex: 999,
 				}}>
 				<div className='p-2'>
 					<NavLink
@@ -105,16 +106,16 @@ function AdminLayout(props) {
 						padding: 0,
 						position: 'fixed',
 						width: '100%',
-						zIndex: 999,
+						zIndex: 800,
 					}}>
 					{React.createElement(
 						collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
 						{
-							className: 'trigger text-2xl ml-4',
+							className: 'trigger text-2xl ml-60',
 							onClick: () => toggle(),
 						}
 					)}
-					<div className='relative'>
+					<div className='relative mr-16'>
 						<span className='absolute bottom-0 right-0 w-4 h-4 bg-green-600 border rounded-full text-green-600 border-gray-50' />
 						<img
 							src='https://source.unsplash.com/50x50/?portrait'
@@ -126,7 +127,7 @@ function AdminLayout(props) {
 				<Content
 					className='site-layout-background bg-white'
 					style={{
-						margin: '100px 16px 0',
+						margin: '100px 16px 0 230px',
 						overflow: 'initial',
 						padding: 24,
 						minHeight: 280,

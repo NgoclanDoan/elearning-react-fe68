@@ -4,7 +4,6 @@ import ClientLayout from 'layouts/ClientLayout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { adminRoutes, clientRoutes } from 'routes';
 import Loader from './components/Loader/Loader';
-import AuthRoute from './hocs/AuthRoute';
 
 //Lazy load - Code splitting
 const LazyLogin = React.lazy(() => import('pages/shared/Auth/Login'));
