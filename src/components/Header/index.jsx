@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 export default class Header extends Component {
   render() {
     return (
       <div>
         <nav
           id="header"
-          className="fixed w-full z-30 top-0 text-black bg-white  "
+          className="fixed w-full z-50 top-0 text-black bg-white  "
         >
           <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
             <div className=" flex items-center">
@@ -57,7 +58,7 @@ export default class Header extends Component {
                     className="inline-block py-2 px-4 text-black font-bold no-underline"
                     href="#"
                   >
-                    Active
+                    HOME
                   </a>
                 </li>
                 <li className="mr-3">
@@ -65,7 +66,7 @@ export default class Header extends Component {
                     className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                     href="#"
                   >
-                    link
+                    COURSES
                   </a>
                 </li>
                 <li className="mr-3">
@@ -73,7 +74,23 @@ export default class Header extends Component {
                     className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                     href="#"
                   >
-                    link
+                    BLOG
+                  </a>
+                </li>
+                <li className="mr-3">
+                  <a
+                    className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                    href="#"
+                  >
+                    EVENTS
+                  </a>
+                </li>
+                <li className="mr-3">
+                  <a
+                    className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                    href="#"
+                  >
+                    ABOUT
                   </a>
                 </li>
               </ul>
@@ -97,7 +114,7 @@ export default class Header extends Component {
                 id="navAction"
                 className=" hover:bg-opacity-85  bg-white border-2 border-gray-600 text-gray-800 font-bold rounded-md mt-4 lg:mt-0 focus:outline-none focus:shadow-outline transform transition  duration-300 ease-in-out w-20 h-8 mx-1 "
               >
-                Log In
+                <Link to="/login">Log In</Link>
               </button>
               <button
                 id="navAction"

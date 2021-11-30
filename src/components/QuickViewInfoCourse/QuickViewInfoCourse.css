@@ -1,0 +1,22 @@
+.quick__view__item::before {
+  content: "\2022";
+  display: inline-block;
+  font-size: 22px;
+  margin-right: 10px;
+  line-height: 1;
+  color: #dedfe0;
+  vertical-align: middle;
+}
+.quick__view__icon {
+  position: relative;
+  cursor: pointer;
+}
+.quick__view__icon__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.quick__view__icon:hover .quick__view__icon__mask {
+  opacity: 1;
+}

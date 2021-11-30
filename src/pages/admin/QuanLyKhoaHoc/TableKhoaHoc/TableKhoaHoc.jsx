@@ -1,122 +1,162 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { Fragment } from 'react';
+import { Switch, Table, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-
-const columns = [
-	{
-		title: '#',
-		dataIndex: 'key',
-		defaultSortOrder: 'descend',
-		sorter: (a, b) => a.age - b.age,
-	},
-	{
-		title: 'Tên khóa học',
-		dataIndex: 'name',
-		filters: [
-			{
-				text: 'Joe',
-				value: 'Joe',
-			},
-			{
-				text: 'Jim',
-				value: 'Jim',
-			},
-			{
-				text: 'Submenu',
-				value: 'Submenu',
-				children: [
-					{
-						text: 'Green',
-						value: 'Green',
-					},
-					{
-						text: 'Black',
-						value: 'Black',
-					},
-				],
-			},
-		],
-		// specify the condition of filtering result
-		// here is that finding the name started with `value`
-		onFilter: (value, record) => record.name.indexOf(value) === 0,
-		sorter: (a, b) => a.name.length - b.name.length,
-		sortDirections: ['descend'],
-	},
-	{
-		title: 'Age',
-		dataIndex: 'age',
-		defaultSortOrder: 'descend',
-		sorter: (a, b) => a.age - b.age,
-	},
-	{
-		title: 'Address',
-		dataIndex: 'address',
-		filters: [
-			{
-				text: 'London',
-				value: 'London',
-			},
-			{
-				text: 'New York',
-				value: 'New York',
-			},
-		],
-		onFilter: (value, record) => record.address.indexOf(value) === 0,
-	},
-	{
-		title: 'Action',
-		dataIndex: '',
-		key: 'x',
-		render: () => (
-			<>
-				<EditOutlined
-					type='button'
-					className='px-2 py-1 rounded text-blue-500 text-sm border-2 border-blue-500 hover:bg-blue-500 hover:text-white cursor-pointer'
-				/>
-				<DeleteOutlined
-					type='button'
-					className='px-2 py-1 ml-2 rounded text-red-500 text-sm border-2 border-red-500 hover:bg-red-500 hover:text-white cursor-pointer'
-				/>
-			</>
-		),
-	},
-];
-
-const data = [
-	{
-		key: '1',
-		name: 'John Brown',
-		age: 32,
-		address: 'New York No. 1 Lake Park',
-	},
-	{
-		key: '2',
-		name: 'Jim Green',
-		age: 42,
-		address: 'London No. 1 Lake Park',
-	},
-	{
-		key: '3',
-		name: 'Joe Black',
-		age: 32,
-		address: 'Sidney No. 1 Lake Park',
-	},
-	{
-		key: '4',
-		name: 'Jim Red',
-		age: 32,
-		address: 'London No. 2 Lake Park',
-	},
-];
+import { useSelector } from 'react-redux';
+import { IMG_KHOA_HOC } from 'settings/imgKhoaHocErrorConfig';
+import { handleImgError } from 'utils/handleImgError';
+import { truncateString } from 'utils/handleString';
+import { NavLink } from 'react-router-dom';
+import khoaHocApi from '../../../../apis/khoaHocApi';
 
 function onChange(pagination, filters, sorter, extra) {
 	console.log('params', pagination, filters, sorter, extra);
 }
 
 function TableKhoaHoc() {
+	const { danhSachKhoaHoc, loading } = useSelector(
+		(state) => state.quanLyKhoaHocReducer
+	);
+	const { accessToken } = useSelector(
+		(state) => state.authReducer.currentUser
+	);
+
+	const handleDeleteButton = (maKhoaHoc, accessToken) => {
+		khoaHocApi
+			.xoaKhoaHoc(maKhoaHoc, accessToken)
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
+	};
+
+	const columns = [
+		{
+			title: 'Tên khóa học',
+			dataIndex: 'tenKhoaHoc',
+			key: 'tenKhoaHoc',
+			className: ' w-2/12',
+			render: (text, khoaHoc, idx) => (
+				<Fragment key={idx}>
+					<p>{khoaHoc.tenKhoaHoc}</p>
+					<span>
+						<Tag color='#2db7f5'>
+							{khoaHoc.danhMucKhoaHoc.tenDanhMucKhoaHoc.toUpperCase()}
+						</Tag>
+					</span>
+				</Fragment>
+			),
+
+			// specify the condition of filtering result
+			// here is that finding the name started with `value`
+			sorter: (a, b) => a.tenKhoaHoc.length - b.tenKhoaHoc.length,
+			sortDirections: ['descend'],
+		},
+		{
+			title: 'Hình ảnh',
+			dataIndex: 'hinhAnh',
+			className: ' w-2/12',
+			render: (text, khoaHoc, idx) => (
+				<Fragment key={idx}>
+					<div className='flex justify-center items-center'>
+						<img
+							src={khoaHoc.hinhAnh}
+							alt={khoaHoc.hinhAnh}
+							onError={(e) => handleImgError(e, IMG_KHOA_HOC)}
+							className='w-full'
+						/>
+					</div>
+				</Fragment>
+			),
+		},
+
+		{
+			title: 'Mô tả',
+			dataIndex: 'moTa',
+			className: ' w-2/12',
+			render: (text, khoaHoc, idx) => (
+				<Fragment key={idx}>
+					{khoaHoc.moTa.length > 50
+						? truncateString(khoaHoc.moTa, 50)
+						: khoaHoc.moTa}
+				</Fragment>
+			),
+			// specify the condition of filtering result
+			// here is that finding the name started with `value`
+			sorter: (a, b) => a.moTa.length - b.moTa.length,
+			sortDirections: ['descend'],
+		},
+		{
+			title: 'NgườI tạo',
+			dataIndex: 'nguoiTao',
+			key: 'nguoiTao',
+			render: (text, khoaHoc, idx) => (
+				<Fragment key={idx}>
+					<span>
+						<p>{khoaHoc.nguoiTao.hoTen}</p>
+						<Tag color='#f50'>
+							{khoaHoc.nguoiTao.tenLoaiNguoiDung.toUpperCase()}
+						</Tag>
+					</span>
+				</Fragment>
+			),
+			// specify the condition of filtering result
+			// here is that finding the name started with `value`
+			sorter: (a, b) => {
+				let nguoiTaoA = a.nguoiTao.hoTen.toLowerCase().trim();
+				let nguoiTaoB = b.nguoiTao.hoTen.toLowerCase().trim();
+				if (nguoiTaoA > nguoiTaoB) {
+					return 1;
+				}
+				return -1;
+			},
+			sortDirections: ['descend', 'ascend'],
+		},
+		{
+			title: 'Ngày tạo',
+			dataIndex: 'ngayTao',
+			className: ' w-1/12',
+		},
+		{
+			title: 'Hiển thị',
+			dataIndex: '',
+			className: 'text-center',
+
+			render: () => <Switch />,
+		},
+
+		{
+			title: 'Action',
+			dataIndex: '',
+			key: 'x',
+			render: (text, khoaHoc, idx) => (
+				<Fragment key={idx}>
+					<NavLink
+						key={1}
+						to={`/admin/khoahoc/edit/${khoaHoc.maKhoaHoc}`}>
+						<EditOutlined
+							type='button'
+							className='px-2 py-1 rounded text-blue-500 text-sm border-2 border-blue-500 hover:bg-blue-500 hover:text-white cursor-pointer'
+						/>
+					</NavLink>
+					<DeleteOutlined
+						type='button'
+						className='px-2 py-1 ml-2 rounded text-red-500 text-sm border-2 border-red-500 hover:bg-red-500 hover:text-white cursor-pointer'
+						onClick={() =>
+							handleDeleteButton(khoaHoc.maKhoaHoc, accessToken)
+						}
+					/>
+				</Fragment>
+			),
+		},
+	];
+
 	return (
 		<div>
-			<Table columns={columns} dataSource={data} onChange={onChange} />
+			<Table
+				loading={loading ? true : false}
+				bordered
+				columns={columns}
+				dataSource={danhSachKhoaHoc}
+				onChange={onChange}
+			/>
 		</div>
 	);
 }

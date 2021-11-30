@@ -1,6 +1,6 @@
 import { Tabs } from "antd";
 import SlickSlider from "../SlickSlider/SlickSlider";
-import './TabPane.css'
+import "./TabPane.css";
 const { TabPane } = Tabs;
 
 function callback(key) {
