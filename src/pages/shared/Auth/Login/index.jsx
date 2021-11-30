@@ -10,7 +10,7 @@ import {
 	actLoginFail,
 	actLoginRequest,
 	actLoginSuccess,
-} from '../module/actions';
+} from '../Module/actions';
 
 function Login() {
 	const [showpass, setShowPass] = useState(false);

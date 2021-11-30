@@ -1,57 +1,27 @@
-.slick-prev,
-.slick-next {
-  color: black;
-  background: gray;
-}
-.slick-prev:hover,
-.slick-prev:focus,
-.slick-next:hover,
-.slick-next:focus {
-  color: black;
-  background: gray;
-}
-.slick-prev:before,
-.slick-next:before {
-  opacity: 1;
-}
-
 .item__shadow {
-  box-shadow: -6px -1.5px 8px -0px rgba(108, 108, 108, 0.74);
+  box-shadow: 0px 5px 8px -4px rgba(0, 0, 0, 0.28);
+  transition: all 0.5s;
+}
+.item__shadow:hover {
+  box-shadow: 0px 5px 8px -0px rgba(0, 0, 0, 0.23);
 }
 
-.tag__slider {
-  font-size: 0.65rem;
-  border-radius: 3px 0 0 3px;
-  display: inline-block;
-  height: 16px;
-  line-height: 16px;
-  padding: 0 10px;
-  position: relative;
-  margin: 0 10px 10px 0;
-  text-decoration: none;
-  -webkit-transition: color 0.2s;
-  box-shadow: 8px 7px 20px 5px rgba(0, 0, 0, 0.37);
+.truncate {
+  white-space: normal;
 }
-.tag__slider::before {
-  background: transparent;
-  border-radius: 10px;
-  content: "";
-  height: 6px;
-  left: 10px;
-  position: absolute;
-  width: 6px;
-  top: 10px;
+
+.slick-next:before,
+.slick-prev:before {
+  content: '';
 }
-.tag__slider::after {
-  background: transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 10.6px solid #fbbf24;
-  border-top: 8px solid transparent;
-  content: "";
-  position: absolute;
-  right: -9.85px;
-  top: 0;
+.slick-next,
+.slick-prev {
+  box-shadow: rgb(0, 0, 0, 0.23) 0px 2px 3px 0px;
+  transition: all 0.5s;
+  z-index: 30;
 }
-.truncate{
-  white-space:normal;
+.slick-next:hover,
+.slick-prev:hover {
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.25);
 }
+
