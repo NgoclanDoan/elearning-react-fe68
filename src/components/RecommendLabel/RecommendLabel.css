@@ -1,0 +1,33 @@
+.tag__slider {
+  font-size: 0.65rem;
+  border-radius: 3px 0 0 3px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 10px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+
+}
+.tag__slider::before {
+  background: transparent;
+  border-radius: 10px;
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+.tag__slider::after {
+  background: transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 10.6px solid #fbbf24;
+  border-top: 8px solid transparent;
+  content: '';
+  position: absolute;
+  right: -9.85px;
+  top: 0;
+}
