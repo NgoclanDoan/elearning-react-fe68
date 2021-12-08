@@ -13,10 +13,8 @@ import {
 } from '../Module/actions';
 
 function Login() {
-	const history = useHistory();
-
 	const [showpass, setShowPass] = useState(false);
-
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const { loading, error, currentUser } = useSelector(
 		(state) => state.authReducer
@@ -26,21 +24,30 @@ function Login() {
 
 	const SignupSchema = Yup.object().shape({
 		taiKhoan: Yup.string().email('Invalid email').required('Required'),
-		matKhau: Yup.string().required('Required'),
+		matKhau: Yup.string()
+			.min(6, ({ min }) => `Password must be at least ${min} characters`)
+			// .matches(
+			// 	/[!@#$%^&*()\-_"=+{}; :,<.>]/,
+			// 	'Password must have a special character'
+			// )
+			// .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+			.matches(/\d/, 'Password must have a number')
+			.required('Required'),
 	});
 
 	const handleOnSubmit = (values, { setSubmitting }) => {
 		dispatch(actLoginRequest());
-
+		setSubmitting(false);
 		nguoiDungApi
 			.dangNhap(values)
 			.then((res) => {
 				dispatch(actLoginSuccess(res.data));
-				history.push('/');
+				console.log(res.data.maLoaiNguoiDung);
+				res.data.maLoaiNguoiDung === 'GV'
+					? history.push('/admin/nguoidung')
+					: history.push('/');
 			})
 			.catch((err) => dispatch(actLoginFail(err.response.data)));
-
-		setSubmitting(false);
 	};
 
 	return !currentUser ? (
@@ -185,7 +192,12 @@ function Login() {
 											value={values.taiKhoan}
 											name='taiKhoan'
 											type='email'
-											className={`bg-gray-200 rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2
+											className={`bg-gray-200 rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 ${
+												touched.taiKhoan &&
+												Boolean(errors.taiKhoan)
+													? 'border-red-700'
+													: ''
+											}
 										`}
 											placeholder='e.g: john@gmail.com'
 										/>
@@ -211,7 +223,12 @@ function Login() {
 														? 'text'
 														: 'password'
 												}
-												className={`bg-gray-200 rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2`}
+												className={`bg-gray-200 rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 ${
+													touched.matKhau &&
+													Boolean(errors.matKhau)
+														? 'border-red-700'
+														: ''
+												}`}
 											/>
 											<div
 												onClick={() =>

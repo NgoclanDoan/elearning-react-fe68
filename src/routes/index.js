@@ -1,11 +1,18 @@
-import DetailCourses from "pages/client/DetailCourses";
-import Home from "pages/client/Home/Home";
-
-import QuanLyNguoiDung from "pages/admin/QuanLyNguoiDung/QuanLyNguoiDung";
-import QuanLyKhoaHoc from "pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc";
-import EditKhoaHoc from "../pages/admin/QuanLyKhoaHoc/Edit";
-import AddKhoaHoc from "../pages/admin/QuanLyKhoaHoc/Add";
+import * as React from "react";
 import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import DetailCourses from "../pages/client/DetailCourses";
+const Home = React.lazy(() => import("pages/client/Home/Home"));
+const QuanLyKhoaHoc = React.lazy(() =>
+  import("pages/admin/QuanLyKhoaHoc/QuanLyKhoaHoc")
+);
+const QuanLyNguoiDung = React.lazy(() =>
+  import("pages/admin/QuanLyNguoiDung/QuanLyNguoiDung")
+);
+const EditKhoaHoc = React.lazy(() => import("pages/admin/QuanLyKhoaHoc/Edit"));
+const AddKhoaHoc = React.lazy(() => import("pages/admin/QuanLyKhoaHoc/Add"));
+const AddNguoiDung = React.lazy(() =>
+  import("pages/admin/QuanLyNguoiDung/Add")
+);
 
 export const clientRoutes = [
   {
@@ -50,6 +57,12 @@ export const adminRoutes = [
   {
     path: "/admin/khoahoc/add",
     component: AddKhoaHoc,
+    exact: true,
+    isPrivate: true,
+  },
+  {
+    path: "/admin/nguoidung/add",
+    component: AddNguoiDung,
     exact: true,
     isPrivate: true,
   },

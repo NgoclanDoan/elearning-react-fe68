@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux';
 import { IMG_KHOA_HOC } from 'settings/imgKhoaHocErrorConfig';
 import { handleImgError } from 'utils/handleImgError';
 import { truncateString } from 'utils/handleString';
-import { NavLink } from 'react-router-dom';
-import khoaHocApi from '../../../../apis/khoaHocApi';
+import { NavLink, useHistory } from 'react-router-dom';
+import khoaHocApi from 'apis/khoaHocApi';
 
 function onChange(pagination, filters, sorter, extra) {
 	console.log('params', pagination, filters, sorter, extra);
 }
 
 function TableKhoaHoc() {
+	const history = useHistory();
 	const { danhSachKhoaHoc, loading } = useSelector(
 		(state) => state.quanLyKhoaHocReducer
 	);
@@ -23,8 +24,8 @@ function TableKhoaHoc() {
 	const handleDeleteButton = (maKhoaHoc, accessToken) => {
 		khoaHocApi
 			.xoaKhoaHoc(maKhoaHoc, accessToken)
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
+			.then((res) => history.push('/admin/khoahoc'))
+			.catch((err) => alert(err));
 	};
 
 	const columns = [
@@ -37,7 +38,7 @@ function TableKhoaHoc() {
 				<Fragment key={idx}>
 					<p>{khoaHoc.tenKhoaHoc}</p>
 					<span>
-						<Tag color='#2db7f5'>
+						<Tag color='#2db7f6'>
 							{khoaHoc.danhMucKhoaHoc.tenDanhMucKhoaHoc.toUpperCase()}
 						</Tag>
 					</span>
@@ -47,7 +48,6 @@ function TableKhoaHoc() {
 			// specify the condition of filtering result
 			// here is that finding the name started with `value`
 			sorter: (a, b) => a.tenKhoaHoc.length - b.tenKhoaHoc.length,
-			sortDirections: ['descend'],
 		},
 		{
 			title: 'Hình ảnh',
@@ -119,7 +119,7 @@ function TableKhoaHoc() {
 			dataIndex: '',
 			className: 'text-center',
 
-			render: () => <Switch />,
+			render: () => <Switch defaultChecked />,
 		},
 
 		{
