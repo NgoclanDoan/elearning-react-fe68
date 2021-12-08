@@ -8,6 +8,11 @@ module.exports = {
       aqua__primary: "#55C3FE",
     }),
 
+    textColor: (theme) => ({
+      ...theme("colors"),
+      aqua__primary: "#55C3FE",
+    }),
+
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
