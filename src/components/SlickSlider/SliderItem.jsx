@@ -1,24 +1,34 @@
 import React, { Component } from "react";
 import RecommendLabel from "../RecommendLabel";
-import QuickViewInfoCourse from "components/QuickViewInfoCourse";
+import { handleImgError } from "utils/handleImgError";
+import arrImgAlt from "settings/arrImgAlternationConfig";
 export default class SliderItem extends Component {
   state = {
     toolTipStatus: false,
   };
+
   render() {
+    const randomImgError =
+      arrImgAlt[Math.floor(Math.random() * arrImgAlt.length)];
+
+    const { hinhAnh, tenKhoaHoc, nguoiTao } = this.props;
+
     return (
-      <div className="mr-3 mb-4">
+      <div className="mr-5 mb-4">
         <div
           onMouseEnter={() => this.setState({ toolTipStatus: true })}
           onMouseLeave={() => this.setState({ toolTipStatus: false })}
           className="item__shadow border border-gray-300 cursor-pointer relative"
+          style={{ height: "298px" }}
         >
           <div className="relative">
-            <div>
+            <div className=" border-b gray-300">
               <img
-                className="w-full"
-                src="http://web.archive.org/web/20200716063439/https://img-a.udemycdn.com/course/240x135/637930_9a22_19.jpg"
-                alt=""
+                className="w-full h-full object-cover "
+                src={hinhAnh}
+                alt={hinhAnh}
+                style={{ height: "135px" }}
+                onError={(e) => handleImgError(e, randomImgError)}
               />
             </div>
             <div className="absolute top-2 left-1">
@@ -26,10 +36,13 @@ export default class SliderItem extends Component {
             </div>
           </div>
           <div className="px-4 my-3 truncate">
-            <h3 className="font-medium  line-clamp-2">
-              An Entire MBA in 1 Course:Award Winning Business School Prof
+            <h3
+              className="font-medium  line-clamp-2"
+              style={{ minHeight: "42px" }}
+            >
+              {tenKhoaHoc}
             </h3>
-            <p className="leading-10">Chris Haroun</p>
+            <p className="leading-10">{nguoiTao}</p>
             <div className="flex ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

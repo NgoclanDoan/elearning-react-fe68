@@ -2,77 +2,12 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import SliderItem from "./SliderItem";
 import "./SlickSlider.css";
-import QuickViewInfoCourse from "../QuickViewInfoCourse";
-
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        width: "40px",
-        height: "40px",
-        background: "white",
-        borderRadius: "50%",
-        border: "1px solid gray",
-      }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-6 h-6 text-blue-700 absolute top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4 "
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9 5l7 7-7 7"
-        />
-      </svg>
-    </div>
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        width: "40px",
-        height: "40px",
-        background: "white",
-        borderRadius: "50%",
-        border: "1px solid gray",
-      }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-6 h-6 text-blue-700 absolute top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
-    </div>
-  );
-}
+import NextArrow from "components/ArrowSlider/NextArrow";
+import PrevArrow from "components/ArrowSlider/PrevArrow";
 export default class SlickSlider extends Component {
   render() {
+    const { listCourses } = this.props;
+
     const settings = {
       speed: 500,
       slidesToShow: 4,
@@ -82,18 +17,27 @@ export default class SlickSlider extends Component {
       // autoplay: true,
       // autoplaySpeed: 2000,
       pauseOnHover: true,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
     };
+
+    const renderListCourses = (listCourses) => {
+      return listCourses.map((course) => {
+        const { hinhAnh, tenKhoaHoc, nguoiTao } = course;
+        return (
+          <SliderItem
+            hinhAnh={hinhAnh}
+            tenKhoaHoc={tenKhoaHoc}
+            nguoiTao={nguoiTao.hoTen}
+          />
+        );
+      });
+    };
+
     return (
       <div>
         <Slider {...settings}>
-          <SliderItem />
-          <SliderItem />
-          <SliderItem />
-          <SliderItem />
-          <SliderItem />
-          <SliderItem />
+          {listCourses.length > 0 && renderListCourses(listCourses)}
         </Slider>
       </div>
     );

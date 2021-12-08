@@ -50,15 +50,15 @@ export default class Content extends Component {
           <div className="flex items-center text-xs text-gray-500 py-1 whitespace-nowrap ml-2.5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 text-gray-700 mr-1.5"
+              className="h-4 w-4 text-gray-700 mr-1.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
@@ -68,15 +68,15 @@ export default class Content extends Component {
           <div className="flex items-center text-xs text-gray-500 py-1 whitespace-nowrap ml-2.5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 text-gray-700 mr-1.5"
+              className="h-4 w-4 text-gray-700 mr-1.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
               />
             </svg>
@@ -108,21 +108,21 @@ export default class Content extends Component {
           <div className="quick__view__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-9 w-9 ml-6 text-red-500"
+              className="h-9 w-9 ml-6 text-red-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-9 w-9 ml-6 text-red-500 quick__view__icon__mask"
+              className="h-9 w-9 ml-6 text-red-500 quick__view__icon__mask"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
